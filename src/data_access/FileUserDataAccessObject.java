@@ -7,6 +7,7 @@ import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -95,5 +96,27 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
+
+    public ArrayList<String> getaccounts() {
+        ArrayList<String> usernames = new ArrayList<>();
+
+        for (String identifier : accounts.keySet()) {
+            usernames.add(identifier);
+        }
+        return usernames;
+    }
+
+    public void deleteall() {
+        try {
+            PrintWriter writer = new PrintWriter(csvFile);
+            writer.print("");
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 }
